@@ -34,9 +34,11 @@ const ConferenceEvent = () => {
         }
       };
     const handleIncrementAvQuantity = (index) => {
+        dispatch(incrementAvQuantity(index));
     };
 
     const handleDecrementAvQuantity = (index) => {
+        dispatch(decrementAvQuantity);
     };
 
     const handleMealSelection = (index) => {
@@ -116,7 +118,7 @@ const ConferenceEvent = () => {
             </div>
         </>
     };
-    
+
     const calculateTotalCost = (section) => {
         let totalCost = 0;
         if (section === "venue") {
