@@ -17,8 +17,8 @@ const TotalCost = ({ totalCosts, ItemsDisplay }) => {
            ${total_amount}
           </h2>
          
-            <div>
-             
+            <div className='render_items'>
+             <ItemsDisplay/>
             </div>
         </div>
       </div>
