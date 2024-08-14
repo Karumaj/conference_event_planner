@@ -38,12 +38,12 @@ const ConferenceEvent = () => {
     };
 
     const handleDecrementAvQuantity = (index) => {
-        dispatch(decrementAvQuantity);
+        dispatch(decrementAvQuantity(IDBIndex));
     };
 
     const handleMealSelection = (index) => {
         const item = mealsItems(index);
-        if(item.selectd && item.type == "mealForPeople"){
+        if(item.selected && item.type == "mealForPeople"){
             // Ensure numberOfPeople is set before toggling selection
             const newNumberOfPeople = item.selected ? numberOfPeople : 0;
             dispatch(toggleMealSelection(index, newNumberOfPeople));
@@ -142,13 +142,6 @@ const ConferenceEvent = () => {
     const avTotalCost = calculateTotalCost("av");
     const mealsTotalCost = calculateTotalCost("meals");
 
-    const totalCosts = {
-        venue: venueTotalCost,
-        av: avTotalCost,
-        meals: mealsTotalCost,
-    };
-    
-
     const navigateToProducts = (idType) => {
         if (idType == '#venue' || idType == '#addons' || idType == '#meals') {
           if (showItems) { // Check if showItems is false
@@ -157,8 +150,11 @@ const ConferenceEvent = () => {
         }
       };
 
-
-
+      const totalCosts = {
+        venue: venueTotalCost,
+        av: avTotalCost,
+        meals: mealsTotalCost,
+    };
 
     return (
         <>
