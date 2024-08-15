@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import "./ConferenceEvent.css";
 import TotalCost from "./TotalCost";
+import { toggleMealSelection } from "./mealsSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { incrementQuantity, decrementQuantity } from "./venueSlice";
 import { incrementAvQuantity, decrementAvQuantity } from "./avSlice";
-import { toggleMealSelection } from "./mealsSlice";
 
 const ConferenceEvent = () => {
     const [showItems, setShowItems] = useState(false);
     const [numberOfPeople, setNumberOfPeople] = useState(1);
     const venueItems = useSelector((state) => state.venue);
-    const avItems = useSelector ((state)=> state.av);
-    const mealsItems = useSelector((state)=> state.meals);
+    const avItems = useSelector((state) => state.av);
+    const mealsItems = useSelector((state) => state.meals);
     const dispatch = useDispatch();
     const remainingAuditoriumQuantity = 3 - venueItems.find(item => item.name === "Auditorium Hall (Capacity:200)").quantity;
 
@@ -38,12 +38,12 @@ const ConferenceEvent = () => {
     };
 
     const handleDecrementAvQuantity = (index) => {
-        dispatch(decrementAvQuantity(IDBIndex));
+        dispatch(decrementAvQuantity(index));
     };
 
     const handleMealSelection = (index) => {
-        const item = mealsItems(index);
-        if(item.selected && item.type == "mealForPeople"){
+        const item = mealsItems[index];
+        if(item.selected && item.type === "mealForPeople"){
             // Ensure numberOfPeople is set before toggling selection
             const newNumberOfPeople = item.selected ? numberOfPeople : 0;
             dispatch(toggleMealSelection(index, newNumberOfPeople));
